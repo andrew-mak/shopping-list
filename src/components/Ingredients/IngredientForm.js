@@ -11,6 +11,8 @@ const IngredientForm = React.memo(props => {
   const submitHandler = event => {
     event.preventDefault();
     props.onAddIngredient({ title: inputTitleState, amount: inputAmountState });
+    setTitleState('');
+    setAmountState('');
   };
 
   return (
@@ -19,13 +21,13 @@ const IngredientForm = React.memo(props => {
         <form onSubmit={submitHandler}>
           <div className="form-control">
             <label htmlFor="title">Name</label>
-            <input type="text" id="title" value={inputTitleState.title}
+            <input type="text" id="title" value={inputTitleState}
               onChange={event => setTitleState(event.target.value)}
             />
           </div>
           <div className="form-control">
             <label htmlFor="amount">Amount</label>
-            <input type="number" id="amount" value={inputAmountState.amount}
+            <input type="number" id="amount" value={inputAmountState}
               onChange={event => setAmountState(event.target.value)}
             />
           </div>

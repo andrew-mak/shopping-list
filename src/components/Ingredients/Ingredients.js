@@ -27,11 +27,11 @@ const httpReducer = (curHttpState, action) => {
 }
 
 function Ingredients() {
-  const [ingredients, dispatchIngrefients] = useReducer(ingredientReducer, []);
+  const [ingredients, dispatchIngredients] = useReducer(ingredientReducer, '');
   const [httpState, dispatchHttp] = useReducer(httpReducer, { loading: false, error: null });
 
   const filtredIngredientsHandler = useCallback(filtredIngredients => {
-    dispatchIngrefients({ type: 'SET', ingredients: filtredIngredients });
+    dispatchIngredients({ type: 'SET', ingredients: filtredIngredients });
   }, []);
 
   const addIngredientHandler = ingredient => {
@@ -42,7 +42,7 @@ function Ingredients() {
       headers: { 'Content-Type': 'application/json' }
     }).then(response => response.json()).then(responseData => {
       dispatchHttp({ type: 'RESPONSE' });
-      dispatchIngrefients({
+      dispatchIngredients({
         type: 'ADD',
         ingredient: { id: responseData.name, ...ingredient }
       })
@@ -55,7 +55,7 @@ function Ingredients() {
       method: 'DELETE'
     }).then(response => {
       dispatchHttp({ type: 'RESPONSE' });
-      dispatchIngrefients({
+      dispatchIngredients({
         type: 'DELETE',
         id: itemId
       })
