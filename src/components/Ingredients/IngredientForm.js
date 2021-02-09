@@ -10,9 +10,15 @@ const IngredientForm = React.memo(props => {
 
   const submitHandler = event => {
     event.preventDefault();
-    props.onAddIngredient({ title: inputTitleState, amount: inputAmountState });
-    setTitleState('');
-    setAmountState('');
+
+    if (inputTitleState.trim().length > 0 && inputAmountState !== '') {
+      props.onAddIngredient({ title: inputTitleState, amount: inputAmountState });
+      setTitleState('');
+      setAmountState('');
+    }
+    else {
+      alert('Invalid input values!')
+    }
   };
 
   return (
