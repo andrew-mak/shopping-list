@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 
 import Card from '../UI/Card';
 import LoadingIndicator from '../UI/LoadingIndicator';
-import './IngredientForm.css';
+import '../../styles/IngredientForm.css';
 
 const IngredientForm = React.memo(props => {
   const [inputTitleState, setTitleState] = useState('');

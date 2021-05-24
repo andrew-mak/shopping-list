@@ -1,6 +1,6 @@
 import React from 'react';
 
-import './ErrorModal.css';
+import '../../styles/ErrorModal.css';
 
 const ErrorModal = React.memo(props => {
   return (

@@ -3,7 +3,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import Card from '../UI/Card';
 import useHttp from '../../hooks/http';
 import ErrorModal from '../UI/ErrorModal';
-import './Search.css';
+import '../../styles/Search.css';
 
 const Search = React.memo(props => {
   const [enteredFilter, setEnteredFilter] = useState('');

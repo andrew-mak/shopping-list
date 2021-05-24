@@ -1,7 +1,7 @@
 import React from 'react';
 
 import LoadingIndicator from '../UI/LoadingIndicator';
-import './IngredientList.css';
+import '../../styles/IngredientList.css';
 
 const IngredientList = React.memo(props => {
   return (
