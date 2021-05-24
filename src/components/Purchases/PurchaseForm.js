@@ -2,9 +2,9 @@ import React, { useState } from 'react';
 
 import Card from '../UI/Card';
 import LoadingIndicator from '../UI/LoadingIndicator';
-import '../../styles/IngredientForm.css';
+import '../../styles/PurchaseForm.css';
 
-const IngredientForm = React.memo(props => {
+const PurchaseForm = React.memo(props => {
   const [inputTitleState, setTitleState] = useState('');
   const [inputAmountState, setAmountState] = useState('');
 
@@ -12,7 +12,7 @@ const IngredientForm = React.memo(props => {
     event.preventDefault();
 
     if (inputTitleState.trim().length > 0 && inputAmountState !== '') {
-      props.onAddIngredient({ title: inputTitleState, amount: inputAmountState });
+      props.onAddPurchase({ title: inputTitleState, amount: inputAmountState });
       setTitleState('');
       setAmountState('');
     }
@@ -22,7 +22,7 @@ const IngredientForm = React.memo(props => {
   };
 
   return (
-    <section className="ingredient-form">
+    <section className="purchase-form">
       <Card>
         <form onSubmit={submitHandler}>
           <div className="form-control">
@@ -37,8 +37,8 @@ const IngredientForm = React.memo(props => {
               onChange={event => setAmountState(event.target.value)}
             />
           </div>
-          <div className="ingredient-form__actions">
-            <button type="submit">Add Ingredient</button>
+          <div className="purchase-form__actions">
+            <button type="submit">Add Purchase</button>
             {props.loading && <LoadingIndicator />}
           </div>
         </form>
@@ -47,4 +47,4 @@ const IngredientForm = React.memo(props => {
   );
 });
 
-export default IngredientForm;
+export default PurchaseForm;

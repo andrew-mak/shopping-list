@@ -7,7 +7,7 @@ import '../../styles/Search.css';
 
 const Search = React.memo(props => {
   const [enteredFilter, setEnteredFilter] = useState('');
-  const { onLoadIngredients } = props;
+  const { onLoadPurchases } = props;
   const inputRef = useRef();
   const { isLoading, data, error, sendRequest, clear } = useHttp();
 
@@ -18,7 +18,7 @@ const Search = React.memo(props => {
           ? ''
           : `?orderBy="title"&startAt="${enteredFilter}"&endAt="${enteredFilter}\uf8ff"`;
         sendRequest(
-          'https://react-hooks-ea382-default-rtdb.firebaseio.com/ingredients.json' + query,
+          'https://react-hooks-ea382-default-rtdb.firebaseio.com/purchases.json' + query,
           'GET'
         );
       }
@@ -28,17 +28,17 @@ const Search = React.memo(props => {
 
   useEffect(() => {
     if (!isLoading && !error) {
-      const loadedIngredients = [];
+      const loadedPurchases = [];
       for (const key in data) {
-        loadedIngredients.push({
+        loadedPurchases.push({
           id: key,
           title: data[key].title,
           amount: data[key].amount,
         })
       }
-      onLoadIngredients(loadedIngredients)
+      onLoadPurchases(loadedPurchases)
     }
-  }, [data, error, isLoading, onLoadIngredients])
+  }, [data, error, isLoading, onLoadPurchases])
 
   return (
     <section className="search">
