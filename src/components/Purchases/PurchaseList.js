@@ -6,7 +6,7 @@ import '../../styles/PurchaseList.css';
 const PurchaseList = React.memo(props => {
   return (
     <section className="purchase-list">
-      <h2>Loaded Purchases</h2>
+      <h2>Already in list</h2>
       { props.purchases ?
         <ul>
           {props.purchases.map(ig => (
