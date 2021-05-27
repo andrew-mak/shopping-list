@@ -9,6 +9,8 @@ const initialState = {
 };
 
 const httpReducer = (curHttpState, action) => {
+  console.log('[httpReducer] curHttpState: ', curHttpState);
+  console.log('[httpReducer] action: ', action);
   switch (action.type) {
     case 'SEND':
       return {
@@ -42,7 +44,9 @@ const useHttp = () => {
 
   const clear = useCallback(() => dispatchHttp({ type: 'CLEAR' }), []);
 
-  const sendRequest = useCallback((url, method, body, delItemId, reqIdentifier) => {
+  const sendRequest = useCallback((url, method, body, itemId, reqIdentifier) => {
+    console.log('reqIdentifier: ', reqIdentifier);
+    console.log('itemId: ', itemId);
     dispatchHttp({ type: 'SEND', identifier: reqIdentifier });
     fetch(url, {
       method: method,
@@ -51,7 +55,7 @@ const useHttp = () => {
         'Content-Type': 'application/json'
       }
     }).then(response => response.json())
-      .then(responseData => dispatchHttp({ type: 'RESPONSE', responseData: responseData, extra: delItemId }))
+      .then(responseData => dispatchHttp({ type: 'RESPONSE', responseData: responseData, extra: itemId }))
       .catch(error => {
         dispatchHttp({ type: 'ERROR', errorMessage: 'Something went wrong :(\n' + error.message });
       });
@@ -61,7 +65,7 @@ const useHttp = () => {
     isLoading: httpState.loading,
     data: httpState.data,
     error: httpState.error,
-    delItemId: httpState.extra,
+    itemId: httpState.extra,
     reqIdentifier: httpState.identifier,
     sendRequest: sendRequest,
     clear: clear

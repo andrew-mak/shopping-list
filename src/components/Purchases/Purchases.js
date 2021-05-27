@@ -10,17 +10,27 @@ import purchaseReducer from '../../reducer';
 
 function Purchases() {
   const [purchases, dispatchPurchases] = useReducer(purchaseReducer, '');
-  const { isLoading, error, data, delItemId, reqIdentifier, sendRequest, clear } = useHttp();
+  const { isLoading, error, data, itemId, reqIdentifier, sendRequest, clear } = useHttp();
 
   useEffect(() => {
-    if (!isLoading && !error && reqIdentifier === 'REMOVE_PURCHASE') {
-      dispatchPurchases({ type: 'DELETE', id: delItemId })
+    if (!isLoading && !error && reqIdentifier === 'PATCH_PURCHASE') {
+      dispatchPurchases({ type: 'PATCH', id: itemId })
     }
-  }, [data, delItemId, reqIdentifier, isLoading, error]);
+  }, [data, itemId, reqIdentifier, isLoading, error]);
 
   const filtredPurchasesHandler = useCallback(filtredPurchases => {
     dispatchPurchases({ type: 'SET', purchases: filtredPurchases });
   }, []);
+
+  const togglePurchaseHandler = useCallback(itemId => {
+    sendRequest(
+      `https://react-hooks-ea382-default-rtdb.firebaseio.com/purchases/${itemId}.json`,
+      'PATCH',
+      JSON.stringify({ status: false }),
+      itemId,
+      'PATCH_PURCHASE'
+    );
+  }, [sendRequest]);
 
   const removePurchaseHandler = useCallback(itemId => {
     sendRequest(
@@ -35,16 +45,17 @@ function Purchases() {
   const purchaseList = useMemo(() => {
     return <PurchaseList
       purchases={purchases}
+      onToggleItem={togglePurchaseHandler}
       onRemoveItem={removePurchaseHandler}
     />
-  }, [purchases, removePurchaseHandler])
+  }, [purchases, togglePurchaseHandler, removePurchaseHandler]);
 
   return (
-    <div className="App">
+    <>
       {error && <ErrorModal onClose={clear} >{error}</ErrorModal>}
       <Search onLoadPurchases={filtredPurchasesHandler} />
       {purchaseList}
-    </div>
+    </>
   );
 }
 

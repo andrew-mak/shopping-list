@@ -16,9 +16,43 @@
 }
 
 .purchase-list li {
-  margin: 1rem 0;
-  padding: 0.5rem 1rem;
-  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.26);
   display: flex;
+  align-items: center;
   justify-content: space-between;
+  margin: 1rem 0;
+  padding: 0 8px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
+}
+
+.purchase-list .item {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 8px;
+  cursor: default;
+}
+
+.purchase-list input[type="image" i] {
+  width: 14px;
+  margin: 0 8px;
+}
+
+.purchase-list img {
+  width: 16px;
+  height: 16px;
+  margin-right: 16px;
+}
+
+.purchase-list span:first-of-type {
+  margin-right: auto;
+}
+
+.purchase-list .item:hover {
+  background: honeydew;
+}
+
+.purchase-list .done {
+  text-decoration: line-through;
+  color: grey;
 }
