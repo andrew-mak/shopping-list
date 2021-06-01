@@ -15,7 +15,6 @@ const Search = React.memo(props => {
     const timer = setTimeout(() => {
       if (enteredFilter === inputRef.current.value) {
         const query = enteredFilter.length === 0
-          // ? '?orderBy="status"&equalTo=true'
           ? ""
           : `?orderBy="title"&startAt="${enteredFilter}"&endAt="${enteredFilter}\uf8ff"`;
         sendRequest(
@@ -29,16 +28,7 @@ const Search = React.memo(props => {
 
   useEffect(() => {
     if (!isLoading && !error) {
-      const loadedPurchases = [];
-      for (const key in data) {
-        loadedPurchases.push({
-          id: key,
-          status: data[key].status,
-          title: data[key].title,
-          amount: data[key].amount,
-        })
-      }
-      onLoadPurchases(loadedPurchases)
+      onLoadPurchases(data)
     }
   }, [data, error, isLoading, onLoadPurchases])
 
@@ -48,7 +38,6 @@ const Search = React.memo(props => {
         {error && <ErrorModal onClose={clear} >{error}</ErrorModal>}
         <div className="search-input">
           <label>{isLoading ? 'Loading...' : 'Filter by Title'}</label>
-          {/* {isLoading && <span>Loading...</span>} */}
           <input type="text"
             ref={inputRef}
             value={enteredFilter}

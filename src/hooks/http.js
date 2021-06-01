@@ -9,8 +9,6 @@ const initialState = {
 };
 
 const httpReducer = (curHttpState, action) => {
-  console.log('[httpReducer] curHttpState: ', curHttpState);
-  console.log('[httpReducer] action: ', action);
   switch (action.type) {
     case 'SEND':
       return {
@@ -45,8 +43,6 @@ const useHttp = () => {
   const clear = useCallback(() => dispatchHttp({ type: 'CLEAR' }), []);
 
   const sendRequest = useCallback((url, method, body, itemId, reqIdentifier) => {
-    console.log('reqIdentifier: ', reqIdentifier);
-    console.log('itemId: ', itemId);
     dispatchHttp({ type: 'SEND', identifier: reqIdentifier });
     fetch(url, {
       method: method,

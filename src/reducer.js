@@ -1,30 +1,32 @@
-export default function purchaseReducer(currentPurchState, action) {
-  console.log('[reducer] action: ', action);
-  console.log('[reducer] state: ', currentPurchState);
+export default function purchaseReducer(currentState, action) {
   switch (action.type) {
-    case 'SET': return action.purchases;
-    case 'ADD': return [...currentPurchState, action.purchase];
-    case 'PATCH':
-      {
-        const i = currentPurchState.findIndex(purch => purch.id === action.id);
-        console.log('[REDUCER] action.id: ', action.id);
-        console.log('[REDUCER] target: ', i);
-        // if (target) {
-        if(typeof i ==="number"){
-          // console.log('[REDUCER] currentPurchState[target].staus: ', currentPurchState[i].status);
-          // let value = !currentPurchState[i].status;
-          // console.log('[REDUCER] !currentPurchState[target].staus: ', value);
-          // target.status = !target.status;
-          // const newState = currentPurchState.filter(purch => purch.id !== action.id);
-          // newState.push(target);
-          // console.log('[REDUCER] newState: ', newState);
-          // return newState
-          currentPurchState[i].status = !currentPurchState[i].status;
-          return currentPurchState;
+    case 'SET':
+      if (action.data) {
+        let loadedPurchases = [];
+        for (const key in action.data) {
+          loadedPurchases.push({
+            id: key,
+            active: action.data[key].active,
+            title: action.data[key].title,
+            amount: action.data[key].amount,
+          })
         }
-        else return currentPurchState
+        return loadedPurchases
       }
-    case 'DELETE': return currentPurchState.filter(purch => purch.id !== action.id);
+      else if (action.data === null && currentState === 'initial') return []
+      else return action.data
+    case 'ADD': return [...currentState, action.purchase];
+    case 'PATCH':
+      const target = currentState.find(purch => purch.id === action.id);
+      const state = currentState.filter(purch => purch.id !== action.id);
+      if (target) {
+        const changed = { ...target };
+        changed.active = !changed.active;
+        state.push(changed);
+        return state;
+      }
+      return currentState
+    case 'DELETE': return (currentState.filter(purch => purch.id !== action.id).length ? currentState : null);
     default:
       throw new Error('Should not be there');
   }

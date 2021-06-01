@@ -36,7 +36,7 @@ const PurchaseForm = React.memo(props => {
     event.preventDefault();
 
     if (inputTitleState.trim().length > 0 && inputAmountState !== '') {
-      addPurchaseHandler({ title: inputTitleState, amount: inputAmountState, status: true });
+      addPurchaseHandler({ title: inputTitleState, amount: inputAmountState, active: true });
       setTitleState('');
       setAmountState('');
     }
