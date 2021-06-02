@@ -21,7 +21,7 @@ const PurchaseList = React.memo(props => {
         />
         <div className={p.active ? "item" : "item done"}>
           <span>{p.title}</span>
-          <span>{p.amount}x</span>
+          <span>{p.amount}</span>
         </div>
         <input
           type="image"

@@ -57,7 +57,7 @@ const PurchaseForm = React.memo(props => {
           </div>
           <div className="form-control">
             <label htmlFor="amount">Amount</label>
-            <input type="number" id="amount" value={inputAmountState}
+            <input type="text" id="amount" value={inputAmountState}
               onChange={event => setAmountState(event.target.value)}
             />
           </div>
