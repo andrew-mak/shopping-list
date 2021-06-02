@@ -4,9 +4,14 @@
   max-width: 80%;
 }
 
+.search-input label {
+  margin-bottom: 12px;
+}
+
 .search-input {
   display: flex;
   justify-content: space-between;
+  padding: 0 16px;
   align-items: center;
   flex-direction: column;
 }
@@ -23,8 +28,11 @@
   border-color: #ff2058;
 }
 
-@media (min-width: 768px) {
+@media (min-width: 600px) {
   .search-input {
     flex-direction: row;
+  }
+  .search-input label {
+    margin-bottom: 0;
   }
 }

@@ -3,11 +3,11 @@ import React, { useState, useEffect, useRef } from 'react';
 import Card from '../UI/Card';
 import useHttp from '../../hooks/http';
 import ErrorModal from '../UI/ErrorModal';
-import './Search.css';
+import '../../styles/Search.css';
 
 const Search = React.memo(props => {
   const [enteredFilter, setEnteredFilter] = useState('');
-  const { onLoadIngredients } = props;
+  const { onLoadPurchases } = props;
   const inputRef = useRef();
   const { isLoading, data, error, sendRequest, clear } = useHttp();
 
@@ -15,10 +15,10 @@ const Search = React.memo(props => {
     const timer = setTimeout(() => {
       if (enteredFilter === inputRef.current.value) {
         const query = enteredFilter.length === 0
-          ? ''
+          ? ""
           : `?orderBy="title"&startAt="${enteredFilter}"&endAt="${enteredFilter}\uf8ff"`;
         sendRequest(
-          'https://react-hooks-ea382-default-rtdb.firebaseio.com/ingredients.json' + query,
+          'https://react-hooks-ea382-default-rtdb.firebaseio.com/purchases.json' + query,
           'GET'
         );
       }
@@ -28,25 +28,16 @@ const Search = React.memo(props => {
 
   useEffect(() => {
     if (!isLoading && !error) {
-      const loadedIngredients = [];
-      for (const key in data) {
-        loadedIngredients.push({
-          id: key,
-          title: data[key].title,
-          amount: data[key].amount,
-        })
-      }
-      onLoadIngredients(loadedIngredients)
+      onLoadPurchases(data)
     }
-  }, [data, error, isLoading, onLoadIngredients])
+  }, [data, error, isLoading, onLoadPurchases])
 
   return (
     <section className="search">
       <Card>
         {error && <ErrorModal onClose={clear} >{error}</ErrorModal>}
         <div className="search-input">
-          <label>Filter by Title</label>
-          {isLoading && <span>Loading...</span>}
+          <label>{isLoading ? 'Loading...' : 'Filter by Title'}</label>
           <input type="text"
             ref={inputRef}
             value={enteredFilter}

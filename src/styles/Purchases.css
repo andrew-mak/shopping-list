@@ -1,0 +1,10 @@
+.container {
+  width: 30rem;
+  max-width: 80%;
+  margin: auto;
+}
+
+h2 {
+  border-bottom: 3px solid #ccc;
+  padding-bottom: 1rem;
+}
