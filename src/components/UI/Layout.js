@@ -10,7 +10,7 @@ const Layout = props => {
         <div className="container">
           <div className="logo">
             <img src={listLogo} alt="logo" />
-            <span>Shopping List</span>
+            <span>Shopping list</span>
           </div>
           <nav>
             <Link to="/purchases">Purchases</Link>
