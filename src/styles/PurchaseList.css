@@ -20,7 +20,7 @@
   align-items: center;
   justify-content: space-between;
   margin: 1rem 0;
-  padding: 0 8px;
+  padding: 0 4px;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
   border-radius: 4px;
 }
@@ -30,19 +30,25 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 8px 8px;
+  padding: 8px 10px;
+  font-size: 18px;
   cursor: default;
 }
 
-.purchase-list input[type="image" i] {
-  width: 14px;
+.purchase-list input[type="image"],
+.purchase-list input[type="button"] {
+  width: 16px;
   margin: 0 8px;
+  padding: 2px;
 }
 
-.purchase-list img {
-  width: 16px;
-  height: 16px;
-  margin-right: 16px;
+.purchase-list input[type="image"].check,
+.purchase-list input[type="button"] {
+  width: 24px;
+  border: 1px solid #a150ca;
+  border-radius: 5px;
+  background-color: transparent;
+  cursor: pointer;
 }
 
 .purchase-list span:first-of-type {

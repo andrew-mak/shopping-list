@@ -2,9 +2,8 @@ import React from 'react';
 
 import LoadingIndicator from '../UI/LoadingIndicator';
 import '../../styles/PurchaseList.css';
-import delIcon from '../../assets/del-icon-32.png';
-import doneIcon from '../../assets/done-icon-32.png';
-import makeDoneIcon from '../../assets/makedone-32.png';
+import delIcon from '../../assets/del-icon-128.png';
+import doneIcon from '../../assets/done-icon-128.png';
 
 const PurchaseList = React.memo(props => {
   const { header, purchases, onToggleItem, onRemoveItem } = props;
@@ -14,9 +13,10 @@ const PurchaseList = React.memo(props => {
     purchasesElements = purchases.map(p =>
       <li key={p.id}>
         <input
-          type="image"
+          type={p.active ? "button" : "image"}
+          className="check"
           alt="check as done"
-          src={p.active ? makeDoneIcon : doneIcon}
+          src={p.active ? "unset" : doneIcon}
           onClick={onToggleItem.bind(this, p.id, p.active)}
         />
         <div className={p.active ? "item" : "item done"}>
@@ -25,7 +25,7 @@ const PurchaseList = React.memo(props => {
         </div>
         <input
           type="image"
-          alt="check as done"
+          alt="delete item"
           src={delIcon}
           onClick={onRemoveItem.bind(this, p.id)}
         />
