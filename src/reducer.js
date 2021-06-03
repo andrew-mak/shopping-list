@@ -26,7 +26,10 @@ export default function purchaseReducer(currentState, action) {
         return state;
       }
       return currentState
-    case 'DELETE': return (currentState.filter(purch => purch.id !== action.id).length ? currentState : null);
+    case 'DELETE':
+      const updState = currentState.filter(purch => purch.id !== action.id);
+      if (updState.length) return updState
+      else return null
     default:
       throw new Error('Should not be there');
   }
